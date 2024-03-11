@@ -6,6 +6,7 @@ const Countries = ({ countries }) => {
   function getVisitedCountry(country) {
     setVisitedCountry([...visitedCountry, country]);
   }
+  console.log(visitedCountry);
 
   return (
     <section>
@@ -30,21 +31,20 @@ const Countries = ({ countries }) => {
         </h2>
         <div className="grid  grid-cols-1 lg:grid-cols-4">
           {visitedCountry?.map((country) => {
+            const { name, avatar, region, population } = country;
             return (
               <div className="flex gap-2 items-center">
                 <div className="h-[80px] w-[100px] rounded-md:">
                   <img
                     className="h-full w-full rounded-md"
-                    src={country?.flags?.png}
+                    src={avatar}
                     alt=""
                   />
                 </div>
                 <div className="py-2 ">
-                  <h2 className="text-sm font-bold">
-                    Name: {country?.name?.common}
-                  </h2>
-                  <p>Region: {country?.region}</p>
-                  <p>Population: {country?.population}</p>
+                  <h2 className="text-sm font-bold">Name: {name}</h2>
+                  <p>Region: {region}</p>
+                  <p>Population: {population}</p>
                   <button className="bg-red-500 rounded-lg px-2 py-1  text-sm text-white duration-300 active:scale-95">
                     delete
                   </button>

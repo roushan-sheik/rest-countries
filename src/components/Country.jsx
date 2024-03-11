@@ -4,7 +4,13 @@ const Country = ({ country, getVisitedCountry }) => {
   const [visited, setVisited] = React.useState(false);
 
   function handleVisitClick() {
-    getVisitedCountry(country);
+    const obj = {
+      avatar: country?.flags?.png,
+      name: country?.name?.common,
+      region: country?.region,
+      population: country?.population,
+    };
+    getVisitedCountry(obj);
     setVisited(!visited);
   }
 
