@@ -2,6 +2,11 @@ import React from "react";
 import Country from "./Country";
 
 const Countries = ({ countries }) => {
+  const [visitedCountry, setVisitedCountry] = React.useState([]);
+  function getVisitedCountry(country) {
+    setVisitedCountry([...visitedCountry, country]);
+  }
+
   return (
     <section>
       {/* header  */}
@@ -20,12 +25,43 @@ const Countries = ({ countries }) => {
       </dir>
       {/* visited country  */}
       <div className="py-4">
-        <h2 className="text-lg font-semibold">Visited Country: {0}</h2>
+        <h2 className="text-lg font-semibold">
+          Visited Country: {visitedCountry.length}
+        </h2>
+        <div className="grid  grid-cols-1 lg:grid-cols-4">
+          {visitedCountry?.map((country) => {
+            return (
+              <div className="flex gap-2 items-center">
+                <div className="h-[80px] w-[100px] rounded-md:">
+                  <img
+                    className="h-full w-full rounded-md"
+                    src={country?.flags?.png}
+                    alt=""
+                  />
+                </div>
+                <div className="py-2 ">
+                  <h2 className="text-sm font-bold">
+                    Name: {country?.name?.common}
+                  </h2>
+                  <p>Region: {country?.region}</p>
+                  <p>Population: {country?.population}</p>
+                  <button className="bg-red-500 rounded-lg px-2 py-1  text-sm text-white duration-300 active:scale-95">
+                    delete
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
       {/* country  */}
       <div className="  grid grid-cols-1 lg:grid-cols-3 gap-6 mx-auto ">
         {countries.map((country) => (
-          <Country country={country} key={country.name.common} />
+          <Country
+            getVisitedCountry={getVisitedCountry}
+            country={country}
+            key={country.name.common}
+          />
         ))}
       </div>
     </section>

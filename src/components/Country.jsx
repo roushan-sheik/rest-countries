@@ -1,9 +1,10 @@
 import React from "react";
 
-const Country = ({ country }) => {
+const Country = ({ country, getVisitedCountry }) => {
   const [visited, setVisited] = React.useState(false);
 
   function handleVisitClick() {
+    getVisitedCountry(country);
     setVisited(!visited);
   }
 
