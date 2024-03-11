@@ -5,13 +5,20 @@ import Country from "./Country";
 
 const Countries = ({ countries }) => {
   const [visitedCountry, setVisitedCountry] = React.useState([]);
+  // get visited country form child by props
+
   function getVisitedCountry(country) {
     // set store from locale storage
     setCountryStorage(country);
     // get store from localestorage
-    const store = getCountryStorage();
-    setVisitedCountry([...visitedCountry, ...store]);
+    console.log({ visitedCountry });
+    // const store = getCountryStorage();
+    // console.log(store);
+    // setVisitedCountry([...store]);
+    //NOTE -  way 2
+    setVisitedCountry([...visitedCountry, country]);
   }
+
   React.useEffect(() => {
     const myStore = getCountryStorage();
     setVisitedCountry([...myStore]);

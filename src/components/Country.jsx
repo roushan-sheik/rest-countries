@@ -1,5 +1,5 @@
 import React from "react";
-
+import { getCountryStorage } from "../utils/getCountryStorage";
 const Country = ({ country, getVisitedCountry }) => {
   const [visited, setVisited] = React.useState(false);
 
@@ -10,8 +10,17 @@ const Country = ({ country, getVisitedCountry }) => {
       region: country?.region,
       population: country?.population,
     };
-    getVisitedCountry(obj);
-    setVisited(!visited);
+    const store = getCountryStorage();
+    const checkDuplickate = store.find(
+      (item) => item.name === country?.name?.common
+    );
+    if (checkDuplickate) {
+      alert("Already visited! Visit another country.");
+      return;
+    } else {
+      getVisitedCountry(obj);
+      setVisited(!visited);
+    }
   }
 
   return (
