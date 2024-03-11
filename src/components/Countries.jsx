@@ -1,12 +1,15 @@
 import React from "react";
 import Country from "./Country";
+import { getCountryStorage } from "../utils/getCountryStorage";
 
 const Countries = ({ countries }) => {
   const [visitedCountry, setVisitedCountry] = React.useState([]);
   function getVisitedCountry(country) {
     setVisitedCountry([...visitedCountry, country]);
   }
-  console.log(visitedCountry);
+  // get store from localestorage 
+  const store = getCountryStorage()
+  console.log(store)
 
   return (
     <section>
