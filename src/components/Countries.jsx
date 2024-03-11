@@ -1,15 +1,21 @@
 import React from "react";
-import Country from "./Country";
 import { getCountryStorage } from "../utils/getCountryStorage";
+import { setCountryStorage } from "../utils/setCountryStorage";
+import Country from "./Country";
 
 const Countries = ({ countries }) => {
   const [visitedCountry, setVisitedCountry] = React.useState([]);
   function getVisitedCountry(country) {
-    setVisitedCountry([...visitedCountry, country]);
+    // set store from locale storage
+    setCountryStorage(country);
+    // get store from localestorage
+    const store = getCountryStorage();
+    setVisitedCountry([...visitedCountry, ...store]);
   }
-  // get store from localestorage 
-  const store = getCountryStorage()
-  console.log(store)
+  React.useEffect(() => {
+    const myStore = getCountryStorage();
+    setVisitedCountry([...myStore]);
+  }, []);
 
   return (
     <section>
@@ -36,7 +42,7 @@ const Countries = ({ countries }) => {
           {visitedCountry?.map((country) => {
             const { name, avatar, region, population } = country;
             return (
-              <div className="flex gap-2 items-center">
+              <div key={name} className="flex gap-2 items-center">
                 <div className="h-[80px] w-[100px] rounded-md:">
                   <img
                     className="h-full w-full rounded-md"
