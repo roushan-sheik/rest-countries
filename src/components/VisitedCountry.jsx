@@ -1,6 +1,6 @@
 import React from "react";
 
-const VisitedCountry = ({allVisited}) => {
+const VisitedCountry = ({ allVisited, getNameToDltVisited }) => {
   return (
     <div>
       {/* visited country  */}
@@ -24,7 +24,10 @@ const VisitedCountry = ({allVisited}) => {
                   <h2 className="text-sm font-bold">Name: {name}</h2>
                   <p>Region: {region}</p>
                   <p>Population: {population}</p>
-                  <button className="bg-red-500 rounded-lg px-2 py-1  text-sm text-white duration-300 active:scale-95">
+                  <button
+                    onClick={() => getNameToDltVisited(name)}
+                    className="bg-red-500 rounded-lg px-2 py-1  text-sm text-white duration-300 active:scale-95"
+                  >
                     delete
                   </button>
                 </div>
